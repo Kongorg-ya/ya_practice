@@ -1,0 +1,9 @@
+---
+# tasks file for nginx_custom
+
+- name: Настройка прокси
+  ansible.builtin.template:
+    src: proxy_conf.j2
+    dest: /etc/nginx/sites-available/default
+  when: "'vm_1' in inventory_hostname" # Выполнится только тогда, когда в имени есть vm_1
+  notify: "Nginx Reloader"
